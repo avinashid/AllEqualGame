@@ -15,25 +15,35 @@ const App = () => {
   const initLen = (e) => {
     numLen = e;
     for (; numLen > 0; numLen--) {
-      let temp = {
-        id: nanoid(),
-        num: Math.ceil(Math.random() * 6),
-        freeze: false,
-      };
-      setNums((e) => [...e, temp]);
+      setNums((e) => [
+        ...e,
+        {
+          id: nanoid(),
+          num: Math.ceil(Math.random() * 6),
+          freeze: false,
+        },
+      ]);
     }
   };
+
   const unmountDefineLength = (e) => {
     setShowComponent({ randomButton: true, defineLength: false });
   };
+
   const setRandom = () => {
     setNums((e) =>
-      e.map((n) => {
-        return { ...n, num: Math.ceil(Math.random() * 6) };
-      })
+      e.map((p) =>
+        p.freeze === false ? { ...p, num: Math.ceil(Math.random() * 6) } : p
+      )
     );
   };
-  const isFreeze = (id) => {};
+
+  const isFreeze = (id) => {
+    setNums((prevNums) =>
+      prevNums.map((p) => (p.id === id ? { ...p, freeze: !p.freeze } : p))
+    );
+  };
+  
   console.log(nums);
   return (
     <>
@@ -51,4 +61,5 @@ const App = () => {
     </>
   );
 };
+
 export default App;

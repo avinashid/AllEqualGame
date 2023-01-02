@@ -73,7 +73,8 @@ button:focus-visible {
 }
 .defineLength{
   display: flex;
-  flex-direction: row;
+  gap:10px;
+  flex-direction: column;
 }
 
 .dice{
@@ -96,4 +97,12 @@ button:focus-visible {
   padding:0px 20px;
   flex-wrap: wrap;
 }
+
+.difficultyContainer,.customDifficulty{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  justify-content: center;
+}
+
 
