@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Heading from "./components/Heading";
 import DiceContainer from "./components/DiceContainer";
 import DefineLength from "./components/DefineLength";
@@ -25,7 +25,6 @@ const App = () => {
       ]);
     }
   };
-
   const unmountDefineLength = (e) => {
     setShowComponent({ randomButton: true, defineLength: false });
   };
@@ -44,7 +43,16 @@ const App = () => {
     );
   };
   
-  console.log(nums);
+  useEffect(() => {
+    const allNums = nums.map(e=>e.num);
+    console.log(allNums.every(val => val === allNums[0]))
+    if(allNums[0] && allNums.every(val => val === allNums[0])){
+      alert("You won the game");
+      setShowComponent({ randomButton: false, defineLength: true });
+      setNums([]);
+    }
+  }, [nums])
+  
   return (
     <>
       <div className="main">
