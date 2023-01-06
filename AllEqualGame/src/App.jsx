@@ -11,6 +11,7 @@ const App = () => {
     defineLength: true,
     randomButton: false,
   });
+  
   let numLen;
   const initLen = (e) => {
     numLen = e;
@@ -42,17 +43,17 @@ const App = () => {
       prevNums.map((p) => (p.id === id ? { ...p, freeze: !p.freeze } : p))
     );
   };
-  
+
   useEffect(() => {
-    const allNums = nums.map(e=>e.num);
-    console.log(allNums.every(val => val === allNums[0]))
-    if(allNums[0] && allNums.every(val => val === allNums[0])){
+    const allNums = nums.map((e) => e.num);
+    const allFreeze = nums.map(e=>e.freeze)
+    console.log(allFreeze);
+    if (allNums[0] && allFreeze.every(e=>e===true) && allNums.every((val) => val === allNums[0])) {
       alert("You won the game");
       setShowComponent({ randomButton: false, defineLength: true });
       setNums([]);
     }
-  }, [nums])
-  
+  }, [nums]);
   return (
     <>
       <div className="main">
@@ -69,5 +70,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;
